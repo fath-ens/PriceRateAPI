@@ -33,4 +33,6 @@ public class CurrencyLayerController {
         priceRepository.save(usdPrice);
         priceRepository.save(eurPrice);
     }
+
+
 }
