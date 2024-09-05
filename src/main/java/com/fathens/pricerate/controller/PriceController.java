@@ -4,11 +4,11 @@ import com.fathens.pricerate.entity.Price;
 import com.fathens.pricerate.repository.PriceRepository;
 import com.fathens.pricerate.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +23,12 @@ public class PriceController {
     }
 
     @GetMapping("/allPrice")
-    public List<Price> getAllPrice(){
-        return priceService.getAllPrice();
+    public Page<Price> getAllPrice(@RequestParam("page") int page,
+                                   @RequestParam("size") int size,
+                                   @RequestParam(required = false) String rateSource,
+                                   @RequestParam(required = false) String rateDate,
+                                   @RequestParam(required = false) String currency){
+        return priceService.getAllPrice(page, size, rateSource, rateDate, currency);
     }
 
     @GetMapping("/rates/{currency}")

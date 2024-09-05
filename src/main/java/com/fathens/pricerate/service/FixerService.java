@@ -49,7 +49,7 @@ public class FixerService {
         return rateMap;
     }
 
-    @Scheduled(fixedRate = 60000)
+    //@Scheduled(fixedRate = 60000)
     public void fetchCurrenyRates() throws IOException, InterruptedException {
         httpClientConfig.getRates("http://localhost:8080/api/fixer/rates");
     }
