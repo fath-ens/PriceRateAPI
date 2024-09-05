@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +27,10 @@ public class PriceController {
     public Page<Price> getAllPrice(@RequestParam("page") int page,  //pagination
                                    @RequestParam("size") int size,
                                    @RequestParam(required = false) String rateSource,   //optional filter
-                                   @RequestParam(required = false) String rateDate,
+                                   @RequestParam(required = false) String startDate,
+                                   @RequestParam(required = false) String endDate,
                                    @RequestParam(required = false) String currency){
-        return priceService.getAllPrice(page, size, rateSource, rateDate, currency);
+        return priceService.getAllPrice(page, size, rateSource, startDate, endDate, currency);
     }
 
     @GetMapping("/rates/{currency}")    //Last currency data

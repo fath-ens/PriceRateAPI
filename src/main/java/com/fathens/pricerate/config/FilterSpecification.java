@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class FilterSpecification {
     public static Specification<Price> hasRateSource(String rateSource){
@@ -26,17 +27,15 @@ public class FilterSpecification {
         });
     }
 
-    public static Specification<Price> isRateDateBetween(String rateDate){
+    public static Specification<Price> isRateDateBetween(String startDate, String endDate){
         return ((root, query, criteriaBuilder) -> {
-            if (rateDate == null){
+            if (startDate == null || endDate == null){
                 return criteriaBuilder.conjunction(); //Null Criteria
             }
-            LocalDate localDate = LocalDate.parse(rateDate);
-            LocalDateTime startOfDay = localDate.atStartOfDay();  //Start of the day
-            LocalDateTime endOfDay = localDate.atTime(23, 59, 59, 999999999);  // End of the day
-            Timestamp startTimestamp = Timestamp.valueOf(startOfDay);   //Localtime to timestamp
-            Timestamp endTimestamp = Timestamp.valueOf(endOfDay);
-            return criteriaBuilder.between(root.get("rateDate"), startTimestamp, endTimestamp); //Add criteria
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime startDateT = LocalDateTime.parse(startDate, formatter);
+            LocalDateTime endDateT = LocalDateTime.parse(endDate, formatter);
+            return criteriaBuilder.between(root.get("rateDate"), startDateT, endDateT); //Add criteria
         });
     }
 }

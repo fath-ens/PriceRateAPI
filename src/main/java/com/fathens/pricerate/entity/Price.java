@@ -23,7 +23,6 @@ public class Price {
     private String rateSource;
 
     @Column(name = "rate_date")
-    @CreationTimestamp
     private LocalDateTime rateDate;
 
     @Column(name = "currency")

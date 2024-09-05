@@ -8,6 +8,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -19,11 +25,12 @@ public class PriceService {
         this.priceRepository = priceRepository;
     }
 
-    public Page<Price> getAllPrice(int page, int size, String rateSource, String rateDate, String currency){
+
+    public Page<Price> getAllPrice(int page, int size, String rateSource, String startDate, String endDate, String currency){
         Pageable pageable = PageRequest.of(page, size);
         Specification<Price> spec = Specification.where(FilterSpecification.hasCurrancy(currency))
                 .and(FilterSpecification.hasRateSource(rateSource))
-                .and(FilterSpecification.isRateDateBetween(rateDate));
+                .and(FilterSpecification.isRateDateBetween(startDate, endDate));
         //Review and creation of criteria in the specification
         return priceRepository.findAll(spec, pageable);
     }
@@ -31,4 +38,5 @@ public class PriceService {
     public List<Price> getCurrencyPrice(String currency) {  //Last currency data
         return priceRepository.findTopByCurrencyOrderByRateDateDesc(currency);
     }
+
 }

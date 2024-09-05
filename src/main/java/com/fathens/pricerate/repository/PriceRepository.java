@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
 import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,5 +18,4 @@ import java.util.List;
 public interface PriceRepository extends JpaRepository<Price, Integer>, JpaSpecificationExecutor<Price> {
 
     List<Price> findTopByCurrencyOrderByRateDateDesc(@Param("currency") String currency);
-
 }
