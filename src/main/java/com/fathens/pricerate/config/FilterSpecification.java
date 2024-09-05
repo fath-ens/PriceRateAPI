@@ -3,8 +3,6 @@ package com.fathens.pricerate.config;
 import com.fathens.pricerate.entity.Price;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
