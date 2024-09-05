@@ -4,20 +4,15 @@ import com.fathens.pricerate.config.HttpClientConfig;
 import com.fathens.pricerate.entity.Price;
 import com.fathens.pricerate.repository.PriceRepository;
 import org.json.JSONObject;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class CurrencyLayerService {

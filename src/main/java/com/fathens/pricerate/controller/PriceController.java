@@ -1,17 +1,12 @@
 package com.fathens.pricerate.controller;
 
 import com.fathens.pricerate.entity.Price;
-import com.fathens.pricerate.repository.PriceRepository;
 import com.fathens.pricerate.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
