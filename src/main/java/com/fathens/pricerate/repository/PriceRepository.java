@@ -18,9 +18,4 @@ public interface PriceRepository extends JpaRepository<Price, Integer>, JpaSpeci
 
     List<Price> findTopByCurrencyOrderByRateDateDesc(@Param("currency") String currency);
 
-    List<Price> findByRateSource(String rateSource);
-
-    List<Price> findByRateDateBetween(Timestamp startOfDay, Timestamp endOfDay);
-
-    Page<Price> findByCurrency(String currency, Pageable pageable);
 }

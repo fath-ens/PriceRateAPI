@@ -18,8 +18,8 @@ public class HttpClientConfig {
 
     public void getRates(String url) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
+                .uri(URI.create(url))   //URL
+                .GET()  //Request Type
                 .build();
         httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     }

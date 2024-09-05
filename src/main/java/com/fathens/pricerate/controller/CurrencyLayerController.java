@@ -16,23 +16,12 @@ import java.util.Map;
 public class CurrencyLayerController {
 
     private final CurrencyLayerService currencyLayerService;
-    private final PriceRepository priceRepository;
-
     @Autowired
-    public CurrencyLayerController(CurrencyLayerService currencyLayerService, PriceRepository priceRepository) {
+    public CurrencyLayerController(CurrencyLayerService currencyLayerService) {
         this.currencyLayerService = currencyLayerService;
-        this.priceRepository = priceRepository;
     }
-
-    @GetMapping("/rates")
-    public void currencyGetPrice(){
-        Map<String, Double> rateMap = currencyLayerService.getPrice();
-        Price usdPrice = new Price("currencylayer.com","USD", rateMap.get("USD"), rateMap.get("USD"));
-        Price eurPrice = new Price("currencylayer.com","EUR", rateMap.get("EUR"), rateMap.get("EUR"));
-
-        priceRepository.save(usdPrice);
-        priceRepository.save(eurPrice);
+    @GetMapping("/rates")   //currenclayer.com api request
+    public String currencyGetPrice(){
+        return currencyLayerService.getPrice();
     }
-
-
 }

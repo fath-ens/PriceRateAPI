@@ -23,15 +23,15 @@ public class PriceController {
     }
 
     @GetMapping("/allPrice")
-    public Page<Price> getAllPrice(@RequestParam("page") int page,
+    public Page<Price> getAllPrice(@RequestParam("page") int page,  //pagination
                                    @RequestParam("size") int size,
-                                   @RequestParam(required = false) String rateSource,
+                                   @RequestParam(required = false) String rateSource,   //optional filter
                                    @RequestParam(required = false) String rateDate,
                                    @RequestParam(required = false) String currency){
         return priceService.getAllPrice(page, size, rateSource, rateDate, currency);
     }
 
-    @GetMapping("/rates/{currency}")
+    @GetMapping("/rates/{currency}")    //Last currency data
     public List<Price> getCurrencyPrice(@PathVariable("currency") String currency){
         return priceService.getCurrencyPrice(currency);
     }
