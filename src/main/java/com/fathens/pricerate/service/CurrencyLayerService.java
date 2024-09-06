@@ -1,6 +1,5 @@
 package com.fathens.pricerate.service;
 
-import com.fathens.pricerate.config.HttpClientConfig;
 import com.fathens.pricerate.entity.Price;
 import com.fathens.pricerate.repository.PriceRepository;
 import org.json.JSONObject;
@@ -19,13 +18,11 @@ public class CurrencyLayerService {
 
     private final RestTemplate restTemplate;
     private final PriceRepository priceRepository;
-    private final HttpClientConfig httpClientConfig;
     private final String apiUrl = "https://api.currencylayer.com/live";
     private final String accessKey = "68e9c8951b4527a77ef14d598802a1ba";
 
-    public CurrencyLayerService(PriceRepository priceRepository, HttpClientConfig httpClientConfig) {
+    public CurrencyLayerService(PriceRepository priceRepository) {
         this.priceRepository = priceRepository;
-        this.httpClientConfig = httpClientConfig;
         this.restTemplate = new RestTemplate();
     }
 
@@ -60,7 +57,7 @@ public class CurrencyLayerService {
     }
     @Scheduled(fixedRate = 7200000) //2 hours scheduled
     public void fetchCurrenyRates() throws IOException, InterruptedException {
-        httpClientConfig.getRates("http://localhost:8080/api/currencylayer/rates");
+        getPrice();
     }
 
 
